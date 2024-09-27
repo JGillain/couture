@@ -19,7 +19,7 @@ public class SvcExemplaireArticle extends Service<ExemplaireArticle> implements 
         super();
     }
 
-    // Méthode qui permet de sauver un livre et de le mettre en DB
+    // Méthode qui permet de sauver un exemplaire d'article et de le mettre en DB
     @Override
     public ExemplaireArticle save(ExemplaireArticle EA) {
         if (EA.getId() == 0) {

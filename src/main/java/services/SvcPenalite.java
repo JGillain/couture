@@ -1,33 +1,31 @@
 package services;
 
-
-import entities.Article;
+import entities.Penalite;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class SvcArticle extends Service<Article> implements Serializable {
+public class SvcPenalite extends Service<Penalite> implements Serializable {
     //Déclaration des variables
     private static final Logger log = Logger.getLogger(SvcArticle.class);
     private static final long serialVersionUID = 1L;
     Map<String, Object> params = new HashMap<String, Object>();
 
-    public SvcArticle() {
+    public SvcPenalite() {
         super();
     }
 
-    // Méthode qui permet de sauver un article et de le mettre en DB
+    // Méthode qui permet de sauver une penalite et de la mettre en DB
     @Override
-    public Article save(Article article) {
-        if (article.getId() == 0) {
-            em.persist(article);
+    public Penalite save(Penalite penalite) {
+        if (penalite.getId() == 0) {
+            em.persist(penalite);
         } else {
-            article = em.merge(article);
+            penalite = em.merge(penalite);
         }
 
-        return article;
+        return penalite;
     }
 }

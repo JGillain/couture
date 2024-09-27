@@ -1,33 +1,31 @@
 package services;
 
-
-import entities.Article;
+import entities.Pays;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class SvcArticle extends Service<Article> implements Serializable {
+public class SvcPays extends Service<Pays> implements Serializable {
     //Déclaration des variables
     private static final Logger log = Logger.getLogger(SvcArticle.class);
     private static final long serialVersionUID = 1L;
     Map<String, Object> params = new HashMap<String, Object>();
 
-    public SvcArticle() {
+    public SvcPays() {
         super();
     }
 
-    // Méthode qui permet de sauver un article et de le mettre en DB
+    // Méthode qui permet de sauver un Pays et de le mettre en DB
     @Override
-    public Article save(Article article) {
-        if (article.getId() == 0) {
-            em.persist(article);
+    public Pays save(Pays pays) {
+        if (pays.getId() == 0) {
+            em.persist(pays);
         } else {
-            article = em.merge(article);
+            pays = em.merge(pays);
         }
 
-        return article;
+        return pays;
     }
 }

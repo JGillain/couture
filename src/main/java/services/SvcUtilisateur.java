@@ -1,33 +1,31 @@
 package services;
 
-
-import entities.Article;
+import entities.Utilisateur;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class SvcArticle extends Service<Article> implements Serializable {
+public class SvcUtilisateur extends Service<Utilisateur> implements Serializable {
     //Déclaration des variables
     private static final Logger log = Logger.getLogger(SvcArticle.class);
     private static final long serialVersionUID = 1L;
     Map<String, Object> params = new HashMap<String, Object>();
 
-    public SvcArticle() {
+    public SvcUtilisateur() {
         super();
     }
 
-    // Méthode qui permet de sauver un article et de le mettre en DB
+    // Méthode qui permet de sauver un utilisateur et de le mettre en DB
     @Override
-    public Article save(Article article) {
-        if (article.getId() == 0) {
-            em.persist(article);
+    public Utilisateur save(Utilisateur utilisateur) {
+        if (utilisateur.getId() == 0) {
+            em.persist(utilisateur);
         } else {
-            article = em.merge(article);
+            utilisateur = em.merge(utilisateur);
         }
 
-        return article;
+        return utilisateur;
     }
 }

@@ -17,6 +17,7 @@ public class SvcJours extends Service<Jour> implements Serializable {
         super();
     }
 
+    // Méthode qui permet de sauver un jour et de le mettre en DB
     @Override
     public Jour save(Jour jours) {
         if (jours.getId() == 0) {

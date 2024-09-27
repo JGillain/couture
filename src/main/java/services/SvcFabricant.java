@@ -19,7 +19,7 @@ public class SvcFabricant extends Service<Fabricant> implements Serializable {
         super();
     }
 
-    // Méthode qui permet de sauver un livre et de le mettre en DB
+    // Méthode qui permet de sauver un fabricant et de le mettre en DB
     @Override
     public Fabricant save(Fabricant fabricant) {
         if (fabricant.getId() == 0) {

@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "pays")
-public class Pay {
+public class Pays {
     @Id
     @Column(name = "IdPays", nullable = false)
     private Integer id;

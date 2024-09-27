@@ -19,7 +19,7 @@ public class SvcFacture extends Service<Facture> implements Serializable {
         super();
     }
 
-    // Méthode qui permet de sauver un livre et de le mettre en DB
+    // Méthode qui permet de sauver une facture et de la mettre en DB
     @Override
     public Facture save(Facture facture) {
         if (facture.getId() == 0) {

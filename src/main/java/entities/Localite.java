@@ -23,7 +23,7 @@ public class Localite {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PaysIdPays", nullable = false)
-    private Pay paysIdPays;
+    private Pays paysIdPays;
 
     public Integer getId() {
         return id;
@@ -49,11 +49,11 @@ public class Localite {
         this.ville = ville;
     }
 
-    public Pay getPaysIdPays() {
+    public Pays getPaysIdPays() {
         return paysIdPays;
     }
 
-    public void setPaysIdPays(Pay paysIdPays) {
+    public void setPaysIdPays(Pays paysIdPays) {
         this.paysIdPays = paysIdPays;
     }
 

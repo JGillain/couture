@@ -19,7 +19,7 @@ public class SvcFactureDetail extends Service<FactureDetail> implements Serializ
         super();
     }
 
-    // Méthode qui permet de sauver un livre et de le mettre en DB
+    // Méthode qui permet de sauver un detail de facture et de le mettre en DB
     @Override
     public FactureDetail save(FactureDetail factureDetail) {
         if (factureDetail.getId() == 0) {
