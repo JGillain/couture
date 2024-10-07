@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tarif")
@@ -23,7 +24,7 @@ public class Tarif {
     private Date dateDebut;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "MagasinIdMagasin", nullable = false)
     private Magasin magasinIdMagasin;
 
@@ -59,4 +60,16 @@ public class Tarif {
         this.magasinIdMagasin = magasinIdMagasin;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tarif tarif = (Tarif) o;
+        return Objects.equals(id, tarif.id) && Objects.equals(denomination, tarif.denomination) && Objects.equals(dateDebut, tarif.dateDebut) && Objects.equals(magasinIdMagasin, tarif.magasinIdMagasin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, denomination, dateDebut, magasinIdMagasin);
+    }
 }

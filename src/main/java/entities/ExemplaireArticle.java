@@ -6,6 +6,7 @@ import enumeration.ExemplaireArticleStatutEnum;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "exemplaire_article")
@@ -51,12 +52,12 @@ public class ExemplaireArticle {
     private ExemplaireArticleStatutEnum statut;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "ArticleIdArticle", nullable = false)
     private Article articleIdArticle;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "MagasinIdMagasin", nullable = false)
     private Magasin magasinIdMagasin;
 
@@ -148,4 +149,16 @@ public class ExemplaireArticle {
         this.magasinIdMagasin = magasinIdMagasin;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExemplaireArticle that = (ExemplaireArticle) o;
+        return Objects.equals(id, that.id) && Objects.equals(codeBarre, that.codeBarre) && etat == that.etat && Objects.equals(actif, that.actif) && Objects.equals(commentaireEtat, that.commentaireEtat) && Objects.equals(loue, that.loue) && Objects.equals(reserve, that.reserve) && Objects.equals(transfert, that.transfert) && statut == that.statut && Objects.equals(articleIdArticle, that.articleIdArticle) && Objects.equals(magasinIdMagasin, that.magasinIdMagasin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, codeBarre, etat, actif, commentaireEtat, loue, reserve, transfert, statut, articleIdArticle, magasinIdMagasin);
+    }
 }

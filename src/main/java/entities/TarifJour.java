@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tarif_jour")
@@ -13,12 +14,12 @@ public class TarifJour {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "TarifIdTarif", nullable = false)
     private Tarif tarifIdTarif;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "JourIdJour", nullable = false)
     private Jour jourIdJour;
 
@@ -35,7 +36,7 @@ public class TarifJour {
     private Date dateFin;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "ArticleIdArticle", nullable = false)
     private Article articleIdArticle;
 
@@ -95,4 +96,16 @@ public class TarifJour {
         this.articleIdArticle = articleIdArticle;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TarifJour tarifJour = (TarifJour) o;
+        return Objects.equals(id, tarifJour.id) && Objects.equals(tarifIdTarif, tarifJour.tarifIdTarif) && Objects.equals(jourIdJour, tarifJour.jourIdJour) && Objects.equals(prix, tarifJour.prix) && Objects.equals(dateDebut, tarifJour.dateDebut) && Objects.equals(dateFin, tarifJour.dateFin) && Objects.equals(articleIdArticle, tarifJour.articleIdArticle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tarifIdTarif, jourIdJour, prix, dateDebut, dateFin, articleIdArticle);
+    }
 }

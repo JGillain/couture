@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tarif_penalite")
@@ -13,12 +14,12 @@ public class TarifPenalite {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "TarifIdTarif", nullable = false)
     private Tarif tarifIdTarif;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "PenaliteIdPenalite", nullable = false)
     private Penalite penaliteIdPenalite;
 
@@ -82,4 +83,16 @@ public class TarifPenalite {
         this.dateFin = dateFin;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TarifPenalite that = (TarifPenalite) o;
+        return Objects.equals(id, that.id) && Objects.equals(tarifIdTarif, that.tarifIdTarif) && Objects.equals(penaliteIdPenalite, that.penaliteIdPenalite) && Objects.equals(prix, that.prix) && Objects.equals(dateDebut, that.dateDebut) && Objects.equals(dateFin, that.dateFin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tarifIdTarif, penaliteIdPenalite, prix, dateDebut, dateFin);
+    }
 }

@@ -11,7 +11,7 @@ import javax.persistence.Persistence;
  */
 public final class EMF {
 	
-	public static EntityManagerFactory emfInstance = Persistence.createEntityManagerFactory("bibliotheque");
+	public static EntityManagerFactory emfInstance = Persistence.createEntityManagerFactory("couture");
 
 	//constructeur
     private EMF() {}

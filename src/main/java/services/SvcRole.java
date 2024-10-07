@@ -1,10 +1,12 @@
 package services;
 
 import entities.Role;
+import entities.Utilisateur;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SvcRole extends Service<Role> implements Serializable {
@@ -27,5 +29,11 @@ public class SvcRole extends Service<Role> implements Serializable {
         }
 
         return role;
+    }
+    public List<Role> findById(int id) {
+        Map<String, Integer> param = new HashMap<>();
+        param.put("id", id);
+
+        return finder.findByNamedQuery("Roles.findRoleById", param);
     }
 }

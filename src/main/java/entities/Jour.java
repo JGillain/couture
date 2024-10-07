@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "jour")
@@ -36,4 +37,16 @@ public class Jour {
         this.nbrJour = nbrJour;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jour jour = (Jour) o;
+        return Objects.equals(id, jour.id) && Objects.equals(nbrJour, jour.nbrJour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nbrJour);
+    }
 }

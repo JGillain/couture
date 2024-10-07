@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "article")
@@ -25,7 +26,7 @@ public class Article {
     private Double prix;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "FabricantIdFabricant", nullable = false)
     private Fabricant fabricantIdFabricant;
 
@@ -69,4 +70,16 @@ public class Article {
         this.fabricantIdFabricant = fabricantIdFabricant;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return Objects.equals(id, article.id) && Objects.equals(nom, article.nom) && Objects.equals(actif, article.actif) && Objects.equals(prix, article.prix) && Objects.equals(fabricantIdFabricant, article.fabricantIdFabricant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, actif, prix, fabricantIdFabricant);
+    }
 }

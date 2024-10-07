@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "localite")
@@ -21,7 +22,7 @@ public class Localite {
     private String ville;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "PaysIdPays", nullable = false)
     private Pays paysIdPays;
 
@@ -57,4 +58,16 @@ public class Localite {
         this.paysIdPays = paysIdPays;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Localite localite = (Localite) o;
+        return Objects.equals(id, localite.id) && Objects.equals(cp, localite.cp) && Objects.equals(ville, localite.ville) && Objects.equals(paysIdPays, localite.paysIdPays);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cp, ville, paysIdPays);
+    }
 }

@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SvcUtilisateur extends Service<Utilisateur> implements Serializable {
@@ -28,4 +29,12 @@ public class SvcUtilisateur extends Service<Utilisateur> implements Serializable
 
         return utilisateur;
     }
+
+    public List<Utilisateur> findByLogin(String login) {
+        Map<String, String> param = new HashMap<>();
+        param.put("login", login);
+
+        return finder.findByNamedQuery("Utilisateur.findByLogin", param);
+    }
+
 }

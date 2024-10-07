@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "magasin")
@@ -47,4 +48,16 @@ public class Magasin {
         this.actif = actif;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Magasin magasin = (Magasin) o;
+        return Objects.equals(id, magasin.id) && Objects.equals(nom, magasin.nom) && Objects.equals(actif, magasin.actif);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, actif);
+    }
 }

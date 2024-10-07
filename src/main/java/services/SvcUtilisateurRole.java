@@ -1,10 +1,12 @@
 package services;
 
+import entities.Utilisateur;
 import entities.UtilisateurRole;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SvcUtilisateurRole extends Service<UtilisateurRole> implements Serializable {
@@ -27,5 +29,12 @@ public class SvcUtilisateurRole extends Service<UtilisateurRole> implements Seri
         }
 
         return utilisateurRole;
+    }
+
+    public List<UtilisateurRole> findByUser(Utilisateur utilisateur) {
+        Map<String, Integer> param = new HashMap<>();
+        param.put("utilisateur", utilisateur.getId());
+
+        return finder.findByNamedQuery("UtilisateurRole.findUserRoleByUser", param);
     }
 }

@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "utilisateur_adresse")
@@ -11,12 +12,12 @@ public class UtilisateurAdresse {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "UtilisateurIdUtilisateur", nullable = false)
     private Utilisateur utilisateurIdUtilisateur;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "AdresseIdAdresse", nullable = false)
     private Adresse adresseIdAdresse;
 
@@ -56,4 +57,16 @@ public class UtilisateurAdresse {
         this.actif = actif;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UtilisateurAdresse that = (UtilisateurAdresse) o;
+        return Objects.equals(id, that.id) && Objects.equals(utilisateurIdUtilisateur, that.utilisateurIdUtilisateur) && Objects.equals(adresseIdAdresse, that.adresseIdAdresse) && Objects.equals(actif, that.actif);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, utilisateurIdUtilisateur, adresseIdAdresse, actif);
+    }
 }

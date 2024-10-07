@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "adresse")
@@ -26,11 +27,11 @@ public class Adresse {
     private String numero;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "LocaliteIdLocalite", nullable = false)
     private Localite localiteIdLocalite;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "MagasinIdMagasin")
     private Magasin magasinIdMagasin;
 
@@ -82,4 +83,16 @@ public class Adresse {
         this.magasinIdMagasin = magasinIdMagasin;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Adresse adresse = (Adresse) o;
+        return Objects.equals(id, adresse.id) && Objects.equals(rue, adresse.rue) && Objects.equals(boite, adresse.boite) && Objects.equals(numero, adresse.numero) && Objects.equals(localiteIdLocalite, adresse.localiteIdLocalite) && Objects.equals(magasinIdMagasin, adresse.magasinIdMagasin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, rue, boite, numero, localiteIdLocalite, magasinIdMagasin);
+    }
 }

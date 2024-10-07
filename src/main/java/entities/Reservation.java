@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Table(name = "reservation")
@@ -19,17 +20,17 @@ public class Reservation {
     private Boolean mailEnvoye = false;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "UtilisateurIdUtilisateur", nullable = false)
     private Utilisateur utilisateurIdUtilisateur;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "MagasinIdMagasin", nullable = false)
     private Magasin magasinIdMagasin;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "ArticleIdArticle", nullable = false)
     private Article articleIdArticle;
 
@@ -81,4 +82,16 @@ public class Reservation {
         this.articleIdArticle = articleIdArticle;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return Objects.equals(id, that.id) && Objects.equals(actif, that.actif) && Objects.equals(mailEnvoye, that.mailEnvoye) && Objects.equals(utilisateurIdUtilisateur, that.utilisateurIdUtilisateur) && Objects.equals(magasinIdMagasin, that.magasinIdMagasin) && Objects.equals(articleIdArticle, that.articleIdArticle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, actif, mailEnvoye, utilisateurIdUtilisateur, magasinIdMagasin, articleIdArticle);
+    }
 }

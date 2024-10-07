@@ -1,14 +1,13 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "role")
+@NamedQuery(name = "Roles.findRoleById", query="SELECT r FROM Role r WHERE r.id=:id")
 public class Role {
     @Id
     @Column(name = "IdRole", nullable = false)
@@ -19,9 +18,6 @@ public class Role {
     @Column(name = "Denomination", nullable = false, length = 150)
     private String denomination;
 
-    @NotNull
-    @Column(name = "Actif", nullable = false)
-    private Boolean actif = false;
 
     public Integer getId() {
         return id;
@@ -39,12 +35,16 @@ public class Role {
         this.denomination = denomination;
     }
 
-    public Boolean getActif() {
-        return actif;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) && Objects.equals(denomination, role.denomination);
     }
 
-    public void setActif(Boolean actif) {
-        this.actif = actif;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, denomination);
     }
-
 }

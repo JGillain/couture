@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 
 @Entity
@@ -38,12 +39,12 @@ public class Facture {
     private String lienPdf;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "UtilisateurIdUtilisateur", nullable = false)
     private Utilisateur utilisateurIdUtilisateur;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "MagasinIdMagasin", nullable = false)
     private Magasin magasinIdMagasin;
 
@@ -111,4 +112,16 @@ public class Facture {
         this.magasinIdMagasin = magasinIdMagasin;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Facture facture = (Facture) o;
+        return Objects.equals(id, facture.id) && Objects.equals(dateDebut, facture.dateDebut) && Objects.equals(prixTVAC, facture.prixTVAC) && Objects.equals(numeroFacture, facture.numeroFacture) && etat == facture.etat && Objects.equals(lienPdf, facture.lienPdf) && Objects.equals(utilisateurIdUtilisateur, facture.utilisateurIdUtilisateur) && Objects.equals(magasinIdMagasin, facture.magasinIdMagasin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dateDebut, prixTVAC, numeroFacture, etat, lienPdf, utilisateurIdUtilisateur, magasinIdMagasin);
+    }
 }

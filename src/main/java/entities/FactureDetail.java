@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "facture_detail")
@@ -13,12 +14,12 @@ public class FactureDetail {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "FactureIdFacture", nullable = false)
     private Facture factureIdFacture;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "ExemplaireArticleIdEA", nullable = false)
     private ExemplaireArticle exemplaireArticleIdEA;
 
@@ -93,4 +94,16 @@ public class FactureDetail {
         this.prix = prix;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FactureDetail that = (FactureDetail) o;
+        return Objects.equals(id, that.id) && Objects.equals(factureIdFacture, that.factureIdFacture) && Objects.equals(exemplaireArticleIdEA, that.exemplaireArticleIdEA) && Objects.equals(dateFin, that.dateFin) && Objects.equals(dateRetour, that.dateRetour) && Objects.equals(etatRendu, that.etatRendu) && Objects.equals(prix, that.prix);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, factureIdFacture, exemplaireArticleIdEA, dateFin, dateRetour, etatRendu, prix);
+    }
 }
